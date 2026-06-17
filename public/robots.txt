@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /$
+Disallow: /v/
+Disallow: /manage/
+Disallow: /api/
+
+Sitemap: https://pagemint.app/sitemap.xml
