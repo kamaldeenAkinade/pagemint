@@ -3,9 +3,15 @@ import { Redis } from "@upstash/redis";
 let redis: Redis | null = null;
 let initError: unknown = null;
 
+// Vercel's Upstash marketplace integration sometimes injects the legacy
+// KV_REST_API_* names instead of UPSTASH_REDIS_REST_*, depending on how the
+// database was provisioned. Accept either.
+const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+
 try {
-  if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
-    redis = Redis.fromEnv();
+  if (url && token) {
+    redis = new Redis({ url, token });
   } else {
     initError = new Error("Missing Upstash Redis environment variables.");
   }
