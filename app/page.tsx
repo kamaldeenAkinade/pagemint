@@ -134,10 +134,17 @@ export default function Home() {
 
   return (
     <div className="page-shell">
-      <div className="wordmark">PageMint</div>
-      <p className="tagline">Paste your HTML, get a link to share</p>
+      <div className="hero">
+        <span className="badge">Free forever &middot; No account needed</span>
+        <div className="wordmark">PageMint</div>
+        <h1 className="hero-title">Paste your HTML. Get a link to share.</h1>
+        <p className="tagline">
+          PageMint turns any pasted HTML into a live, public web page in one click — no code to write,
+          nothing to install, and no sign up.
+        </p>
+      </div>
 
-      <div className="card">
+      <div className="card card-elevated">
         <label htmlFor="html-input">Paste your code here</label>
         <textarea
           id="html-input"
@@ -161,12 +168,22 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="explainer">
-        <p>
-          PageMint turns any pasted HTML into a live web page with its own link, instantly. There&apos;s
-          no code to write, nothing to install, and no account needed: paste, click, and share the
-          page with anyone. It&apos;s a simple way to host HTML free and publish a page online in seconds.
-        </p>
+      <div className="features">
+        <div className="feature-card">
+          <span className="feature-icon">⚡</span>
+          <h3>Live in one click</h3>
+          <p>Paste, click, done. Your page is online instantly with a link anyone can open.</p>
+        </div>
+        <div className="feature-card">
+          <span className="feature-icon">🔒</span>
+          <h3>Only you can edit it</h3>
+          <p>You get a secret key at creation. It&apos;s the only way to change or delete the page later.</p>
+        </div>
+        <div className="feature-card">
+          <span className="feature-icon">∞</span>
+          <h3>Free, forever</h3>
+          <p>No account, no credit card, no expiring links. Your page stays up until you remove it.</p>
+        </div>
       </div>
 
       {history.length > 0 && (
