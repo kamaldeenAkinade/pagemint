@@ -80,10 +80,14 @@ export default function Home() {
     const url = `${typeof window !== "undefined" ? window.location.origin : ""}/v/${success.id}`;
     return (
       <div className="page-shell">
-        <div className="wordmark">PageMint</div>
-        <p className="tagline">Paste your HTML, get a link to share</p>
-        <div className="card">
+        <nav className="topnav">
+          <span className="wordmark">PageMint</span>
+        </nav>
+
+        <div className="card card-elevated success-card">
+          <span className="success-dot" aria-hidden="true" />
           <h1 className="success-heading">Your page is live.</h1>
+          <p className="success-sub">Anyone with the link below can view it.</p>
 
           <label htmlFor="share-url">Your shareable link</label>
           <div className="field-row">
@@ -113,11 +117,8 @@ export default function Home() {
             <a className="btn btn-secondary" href={`/manage/${success.id}`}>
               Manage this page
             </a>
-          </div>
-
-          <div className="btn-row">
             <button
-              className="btn btn-secondary"
+              className="btn btn-ghost"
               onClick={() => {
                 setSuccess(null);
                 setHtml("");
@@ -127,6 +128,8 @@ export default function Home() {
             </button>
           </div>
         </div>
+
+        <Footer />
         <ToastTray toasts={toasts} />
       </div>
     );
@@ -134,37 +137,54 @@ export default function Home() {
 
   return (
     <div className="page-shell">
+      <nav className="topnav">
+        <span className="wordmark">PageMint</span>
+      </nav>
+
       <div className="hero">
         <span className="badge">Free forever &middot; No account needed</span>
-        <div className="wordmark">PageMint</div>
-        <h1 className="hero-title">Paste your HTML. Get a link to share.</h1>
+        <h1 className="hero-title">
+          Paste your HTML.
+          <br />
+          <span className="hero-title-accent">Get a link to share.</span>
+        </h1>
         <p className="tagline">
-          PageMint turns any pasted HTML into a live, public web page in one click — no code to write,
-          nothing to install, and no sign up.
+          Turn any pasted HTML into a live, public web page in one click — no code to write, nothing
+          to install, and no sign up.
         </p>
       </div>
 
-      <div className="card card-elevated">
-        <label htmlFor="html-input">Paste your code here</label>
-        <textarea
-          id="html-input"
-          placeholder={PLACEHOLDER}
-          value={html}
-          onChange={(e) => setHtml(e.target.value)}
-        />
-        <p className="hint">
-          Pasted pages run their own code, so only paste content you trust or created yourself.
-        </p>
-        <div className="btn-row">
-          <button className="btn btn-primary" onClick={handleCreate} disabled={loading}>
-            {loading ? (
-              <>
-                <span className="spinner" /> Working...
-              </>
-            ) : (
-              "Create my link"
-            )}
-          </button>
+      <div className="editor-window">
+        <div className="editor-chrome">
+          <span className="dot dot-red" />
+          <span className="dot dot-yellow" />
+          <span className="dot dot-green" />
+          <span className="editor-filename">your-page.html</span>
+        </div>
+        <div className="editor-body">
+          <label htmlFor="html-input" className="sr-only">
+            Paste your code here
+          </label>
+          <textarea
+            id="html-input"
+            placeholder={PLACEHOLDER}
+            value={html}
+            onChange={(e) => setHtml(e.target.value)}
+          />
+          <p className="hint">
+            Pasted pages run their own code, so only paste content you trust or created yourself.
+          </p>
+          <div className="btn-row">
+            <button className="btn btn-primary" onClick={handleCreate} disabled={loading}>
+              {loading ? (
+                <>
+                  <span className="spinner" /> Working...
+                </>
+              ) : (
+                "Create my link"
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -199,7 +219,16 @@ export default function Home() {
         </div>
       )}
 
+      <Footer />
       <ToastTray toasts={toasts} />
     </div>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <p>PageMint &middot; Paste HTML, get a link.</p>
+    </footer>
   );
 }
